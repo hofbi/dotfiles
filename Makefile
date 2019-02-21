@@ -8,5 +8,7 @@ all: update dotfiles
 	@git pull
 
 .PHONY: dotfiles
-dotfiles: # Create symlinks for dotfiles
-	@cd links; find . -type f -exec ln -fsv $(ROOT_DIR)/links/{} $(HOME)/{} \;    # create links
+dotfiles: # Create directories and symlinks for dotfiles
+	cd links && \
+	  find . -type d -exec mkdir -p $(HOME)/{} \; && \
+	  find . -type f -exec ln -fsv $(ROOT_DIR)/links/{} $(HOME)/{} \;
