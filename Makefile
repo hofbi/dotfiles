@@ -3,6 +3,10 @@ ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 .PHONY: all
 all: update dotfiles
 
+.PHONY: setup
+setup:
+	@script/install.sh
+
 .PHONY: update
 	@git checkout master
 	@git pull
