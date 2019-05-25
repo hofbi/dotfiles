@@ -13,5 +13,6 @@
 [plugins]
 [profiles]
   [[default]]
+    background_color = "#282828"
     cursor_color = "#aaaaaa"
-    foreground_color = "#73d216"
+    foreground_color = "#ebdbb2"
