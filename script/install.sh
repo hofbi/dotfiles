@@ -13,3 +13,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions  ~/.oh-my-zsh/custom/
 # Tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~/.tmux/plugins/tpm/bin/install_plugins
+
+# Vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall

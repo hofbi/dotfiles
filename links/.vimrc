@@ -23,3 +23,16 @@ set ruler                               " Show row and column ruler information
 
 set undolevels=1000                     " Number of undo levels
 set backspace=indent,eol,start          " Backspace behaviour
+
+"Plugin runtime
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"Plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+call vundle#end()
+
+"Powerline
+set laststatus=2
