@@ -18,6 +18,9 @@ set smartindent                         " Enable smart-indent
 set smarttab                            " Enable smart-tabs
 set softtabstop=4                       " Number of spaces per Tab
 
+set list                                " Show invisible chars but whitespace
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
 " Advanced
 set ruler                               " Show row and column ruler information
 

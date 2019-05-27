@@ -17,6 +17,9 @@
                 }
             },
             {
+                "function": "powerline.segments.common.env.user"
+            },
+            {
                 "function": "powerline.segments.common.net.hostname"
             }
         ]
