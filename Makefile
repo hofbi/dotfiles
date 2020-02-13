@@ -5,11 +5,7 @@ all: update dotfiles
 
 .PHONY: setup
 setup:
-	@script/install.sh
-
-.PHONY: update
-	@git checkout master
-	@git pull
+	@script/install.py
 
 .PHONY: dotfiles
 dotfiles: # Create directories and symlinks for dotfiles
