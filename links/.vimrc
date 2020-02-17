@@ -1,3 +1,40 @@
+"Plugin runtime
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"Plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'tpope/vim-surround.git'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'wincent/command-t' " cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t && ruby extconf.rb && make and probably sudo apt install ruby2.5-dev
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'preservim/nerdcommenter'
+
+call vundle#end()
+filetype plugin indent on    " required
+
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" Powerline
+set laststatus=2
+
+" Command-t
+let mapleader = ","
+map <Leader>t <Plug>(CommandT)
+
+" FZF
+set rtp+=~/.fzf
+
 " General
 set number                              " Show line numbers
 set linebreak                           " Break lines at word (requires Wrap lines)
@@ -26,16 +63,3 @@ set ruler                               " Show row and column ruler information
 
 set undolevels=1000                     " Number of undo levels
 set backspace=indent,eol,start          " Backspace behaviour
-
-"Plugin runtime
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-"Plugins
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-call vundle#end()
-
-"Powerline
-set laststatus=2
