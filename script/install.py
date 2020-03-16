@@ -6,7 +6,7 @@ from subprocess import check_call
 
 
 def call(command):
-    print(f"calling: \"{command}\"")
+    print(f'calling: "{command}"')
     return check_call(command, shell=True)
 
 
@@ -25,28 +25,39 @@ def install_oh_my_zsh():
     def install_plugins():
         oh_path = "~/.oh-my-zsh/custom"
         clone_or_update_git_repo(
-            "https://github.com/romkatv/powerlevel10k.git", f"{oh_path}/themes/powerlevel10k")
-        clone_or_update_git_repo("https://github.com/zsh-users/zsh-autosuggestions.git",
-                                 f"{oh_path}/plugins/zsh-autosuggestions")
-        clone_or_update_git_repo("https://github.com/zsh-users/zsh-syntax-highlighting.git",
-                                 f"{oh_path}/plugins/zsh-syntax-highlighting")
+            "https://github.com/romkatv/powerlevel10k.git",
+            f"{oh_path}/themes/powerlevel10k",
+        )
+        clone_or_update_git_repo(
+            "https://github.com/zsh-users/zsh-autosuggestions.git",
+            f"{oh_path}/plugins/zsh-autosuggestions",
+        )
+        clone_or_update_git_repo(
+            "https://github.com/zsh-users/zsh-syntax-highlighting.git",
+            f"{oh_path}/plugins/zsh-syntax-highlighting",
+        )
 
     if "ZSH" not in os.environ:
-        call("sh -c \"$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)\"")
+        call(
+            'sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"'
+        )
     install_plugins()
 
 
 def install_vim_config():
     clone_or_update_git_repo(
-        "https://github.com/VundleVim/Vundle.vim.git", "~/.vim/bundle/Vundle.vim")
+        "https://github.com/VundleVim/Vundle.vim.git", "~/.vim/bundle/Vundle.vim"
+    )
     call("vim +PluginInstall +qall")
 
 
 def install_tmux_config():
     clone_or_update_git_repo(
-        "https://github.com/tmux-plugins/tpm", "~/.tmux/plugins/tpm")
+        "https://github.com/tmux-plugins/tpm", "~/.tmux/plugins/tpm"
+    )
     call(
-        "tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/bin/install_plugins && tmux kill-server")
+        "tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server"
+    )
 
 
 def install_fzf():
