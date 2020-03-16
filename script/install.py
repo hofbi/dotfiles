@@ -21,6 +21,21 @@ def install_apt_packages():
     call("sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv")
 
 
+def install_fonts():
+    call(
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+    )
+    call(
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+    )
+    call(
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+    )
+    call(
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+    )
+
+
 def install_oh_my_zsh():
     def install_plugins():
         oh_path = "~/.oh-my-zsh/custom"
@@ -67,6 +82,7 @@ def install_fzf():
 
 def main():
     install_apt_packages()
+    install_fonts()
     install_oh_my_zsh()
     install_vim_config()
     install_tmux_config()
