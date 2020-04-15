@@ -54,7 +54,7 @@ def install_oh_my_zsh():
 
     if "ZSH" not in os.environ:
         call(
-            'sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"'
+            'sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --keep-zshrc"'
         )
     install_plugins()
 
@@ -71,13 +71,13 @@ def install_tmux_config():
         "https://github.com/tmux-plugins/tpm", "~/.tmux/plugins/tpm"
     )
     call(
-        "tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server"
+        "tmux start-server && tmux new-session -d && sleep 1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server"
     )
 
 
 def install_fzf():
     clone_or_update_git_repo("https://github.com/junegunn/fzf.git", "~/.fzf")
-    call("~/.fzf/install")
+    call("~/.fzf/install --all")
 
 
 def main():

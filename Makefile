@@ -1,11 +1,11 @@
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-.PHONY: all
-all: update dotfiles
+.PHONY: default
+default:
+	@script/install.py
 
 .PHONY: setup
-setup:
-	@script/install.py
+setup: dotfiles default
 
 .PHONY: dotfiles
 dotfiles: # Create directories and symlinks for dotfiles
