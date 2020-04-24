@@ -18,7 +18,9 @@ def clone_or_update_git_repo(url, path):
 
 
 def install_apt_packages():
-    call("sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv")
+    call(
+        "sudo apt update && sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv"
+    )
 
 
 def install_fonts():
@@ -63,7 +65,7 @@ def install_vim_config():
     clone_or_update_git_repo(
         "https://github.com/VundleVim/Vundle.vim.git", "~/.vim/bundle/Vundle.vim"
     )
-    call("vim +PluginInstall +qall")
+    call("vim +PluginInstall +PluginClean! +qall")
 
 
 def install_tmux_config():

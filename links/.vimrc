@@ -7,7 +7,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-surround.git'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'wincent/command-t' " cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t && ruby extconf.rb && make and probably sudo apt install ruby2.5-dev
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
@@ -25,15 +24,24 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" Leader
+let mapleader = ","
+
 " Powerline
 set laststatus=2
 
 " Command-t
-let mapleader = ","
 map <Leader>t <Plug>(CommandT)
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+" If more than one window and previous buffer was NERDTree, go back to it.
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 
 " FZF
 set rtp+=~/.fzf
+map <C-t> :FZF<CR>
 
 " General
 set number                              " Show line numbers
@@ -58,7 +66,6 @@ set softtabstop=4                       " Number of spaces per Tab
 set list                                " Show invisible chars but whitespace
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
-" Advanced
 set ruler                               " Show row and column ruler information
 
 set undolevels=1000                     " Number of undo levels
