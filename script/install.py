@@ -18,8 +18,13 @@ def clone_or_update_git_repo(url, path):
 
 
 def install_apt_packages():
+    sudo_command = "sudo"
+    if "PASS" in os.environ:
+        # Set pass for CI job
+        sudo_command = f"echo {os.environ.get('PASS')} | sudo -S"
+
     call(
-        "sudo apt update && sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv"
+        f"{sudo_command} apt update && {sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv"
     )
 
 
