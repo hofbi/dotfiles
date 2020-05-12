@@ -16,6 +16,8 @@ dotfiles: # Create directories and symlinks for dotfiles
 	  find . -type d -exec mkdir -p $(HOME)/{} \; && \
 	  find . -type f -exec ln -fsv $(ROOT_DIR)/links/{} $(HOME)/{} \;
 
+check: check_format
+
 format:
 	$(PY_FILES) | xargs black
 
