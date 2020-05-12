@@ -17,3 +17,12 @@ jobs:
         pip install black
     - name: Check code
       run: make check
+
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file docker/Dockerfile --tag dotfiles
+      - name: Run setup
+        run: docker run -v $(pwd):/home/foo/.dotfiles -w /home/foo/.dotfiles -u foo -e USER=foo -e PASS=a -e ZSH=true dotfiles bash -c "make setup"

@@ -16,10 +16,13 @@ dotfiles: # Create directories and symlinks for dotfiles
 	  find . -type d -exec mkdir -p $(HOME)/{} \; && \
 	  find . -type f -exec ln -fsv $(ROOT_DIR)/links/{} $(HOME)/{} \;
 
+.PHONY: check
 check: check_format
 
+.PHONY: format
 format:
 	$(PY_FILES) | xargs black
 
+.PHONY: check_format
 check_format:
 	$(PY_FILES) | xargs  black --diff --check
