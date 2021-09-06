@@ -17,7 +17,7 @@ dotfiles: # Create directories and symlinks for dotfiles
 	  find . -type f -exec ln -fsv $(ROOT_DIR)/links/{} $(HOME)/{} \;
 
 .PHONY: check
-check: check_format
+check: check_format flake8
 
 .PHONY: format
 format:
@@ -26,3 +26,6 @@ format:
 .PHONY: check_format
 check_format:
 	$(PY_FILES) | xargs  black --diff --check
+
+flake8:
+	$(PY_FILES) | xargs flake8
