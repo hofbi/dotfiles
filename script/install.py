@@ -89,6 +89,10 @@ def install_fzf():
     call("~/.fzf/install --all")
 
 
+def install_local_config():
+    Path.home().joinpath(".zshrc.local").touch(exist_ok=True)
+
+
 def main():
     install_apt_packages()
     install_fonts()
@@ -96,6 +100,7 @@ def main():
     install_vim_config()
     install_tmux_config()
     install_fzf()
+    install_local_config()
 
 
 if __name__ == "__main__":

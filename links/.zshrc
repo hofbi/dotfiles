@@ -101,3 +101,6 @@ export VISUAL='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Local config
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
