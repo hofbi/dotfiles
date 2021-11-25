@@ -4,7 +4,7 @@ CMAKE_FILES = $(call file_finder,-name "*.cmake" -o -name "CMakeLists.txt")
 PY_FILES = $(call file_finder,-name "*.py")
 CPP_FILES = $(call file_finder,-regex '.*\.\(cpp\|hpp\|cu\|c\|cc\|h\)')
 
-check: check_format check_sh_format pylint shellcheck flake8
+check: check_format pylint shellcheck flake8 check_sh_format
 
 format:
 	$(PY_FILES) | xargs black

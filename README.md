@@ -12,6 +12,6 @@ Setup the docker test environment
 
 ```shell
 cd docker
-docker-compose build
-docker-compose run dotfiles
+docker compose build
+docker compose run dotfiles
 ```

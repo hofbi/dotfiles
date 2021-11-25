@@ -7,12 +7,12 @@ from pathlib import Path
 from subprocess import check_call
 
 
-def call(command):
+def call(command: str) -> int:
     print(f'calling: "{command}"')
     return check_call(command, shell=True)
 
 
-def clone_or_update_git_repo(url, path):
+def clone_or_update_git_repo(url: str, path: str) -> None:
     if not Path(path).expanduser().is_dir():
         call(f"git clone {url} {path}")
     else:
