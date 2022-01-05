@@ -16,7 +16,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Check code
-      run: make check
+      run: pre-commit run --from-ref origin/master --to-ref HEAD
 
   setup:
     runs-on: ubuntu-latest

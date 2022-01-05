@@ -1,7 +1,6 @@
 file_finder = find . -type f $(1) -not -path './venv/*'
 
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-PY_FILES = $(call file_finder,-name "*.py")
 
 .PHONY: default
 default:
@@ -15,17 +14,3 @@ dotfiles: # Create directories and symlinks for dotfiles
 	cd links && \
 	  find . -type d -exec mkdir -p $(HOME)/{} \; && \
 	  find . -type f -exec ln -fsv $(ROOT_DIR)/links/{} $(HOME)/{} \;
-
-.PHONY: check
-check: check_format flake8
-
-.PHONY: format
-format:
-	$(PY_FILES) | xargs black
-
-.PHONY: check_format
-check_format:
-	$(PY_FILES) | xargs  black --diff --check
-
-flake8:
-	$(PY_FILES) | xargs flake8
