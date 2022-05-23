@@ -93,6 +93,10 @@ def install_local_config():
     Path.home().joinpath(".zshrc.local").touch(exist_ok=True)
 
 
+def install_i3():
+    call("sudo apt update && sudo apt install -y i3 feh rofi")
+
+
 def main():
     install_apt_packages()
     install_fonts()
