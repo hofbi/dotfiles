@@ -30,7 +30,7 @@ memory {
 
 ethernet _first_ {
     format_up = " E: %ip (%speed) "
-    format_down = "E: down"
+    format_down = " E: down "
 }
 
 disk "/" {
