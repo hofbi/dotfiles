@@ -47,7 +47,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+space exec rofi rofi -show run -lines 3 -eh 2 -width 100 -padding 80 -opacity "85" -bw 0
+bindsym $mod+space exec ulauncher
 
 # change focus
 bindsym $mod+Left focus left
@@ -66,6 +66,9 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
+
+# start nautilus
+bindsym $mod+n exec nautilus
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle

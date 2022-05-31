@@ -94,7 +94,8 @@ def install_local_config():
 
 
 def install_i3():
-    call("sudo apt update && sudo apt install -y i3 feh rofi")
+    call("sudo add-apt-repository ppa:agornostal/ulauncher")
+    call("sudo apt update && sudo apt install -y i3 feh arandr ulauncher")
 
 
 def main():
