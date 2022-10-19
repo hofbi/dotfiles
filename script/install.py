@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
+"""Installer for all dotfiles and the tools using it"""
+
 # flake8: noqa: E501
+# pylint: disable=line-too-long
 
 import os
 from pathlib import Path
