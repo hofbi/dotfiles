@@ -59,6 +59,7 @@ repos:
     rev: v0.8.0.4
     hooks:
       - id: shellcheck
+        exclude: ^links/
   - repo: https://github.com/crate-ci/typos
     rev: v1.12.8
     hooks:
