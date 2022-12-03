@@ -1,4 +1,2 @@
 [flake8]
 max-line-length = 120
-
-ignore = E203  # Ignore "whitespace before ':'" because it conflicts with black's

@@ -2,7 +2,6 @@
 
 """Installer for all dotfiles and the tools using it"""
 
-# flake8: noqa: E501
 # pylint: disable=line-too-long
 
 import os
@@ -29,22 +28,22 @@ def install_apt_packages():
         sudo_command = f"echo {os.environ.get('PASS')} | sudo -S"
 
     call(
-        f"{sudo_command} apt update && {sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv"
+        f"{sudo_command} apt update && {sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv"  # noqa: E501
     )
 
 
 def install_fonts():
     call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"  # noqa: E501
     )
     call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"  # noqa: E501
     )
     call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"  # noqa: E501
     )
     call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"  # noqa: E501
     )
 
 
@@ -66,7 +65,7 @@ def install_oh_my_zsh():
 
     if "ZSH" not in os.environ:
         call(
-            'sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --keep-zshrc"'
+            'sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --keep-zshrc"'  # noqa: E501
         )
     install_plugins()
 
@@ -83,7 +82,7 @@ def install_tmux_config():
         "https://github.com/tmux-plugins/tpm", "~/.tmux/plugins/tpm"
     )
     call(
-        "tmux start-server && tmux new-session -d && sleep 1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server"
+        "tmux start-server && tmux new-session -d && sleep 1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server"  # noqa: E501
     )
 
 
