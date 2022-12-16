@@ -95,6 +95,10 @@ def install_local_config():
     Path.home().joinpath(".zshrc.local").touch(exist_ok=True)
 
 
+def post_setup():
+    call("source ~/.profile")  # Add ~/.local/bin to PATH
+
+
 def install_i3():
     call("sudo add-apt-repository ppa:agornostal/ulauncher")
     call("sudo apt update && sudo apt install -y i3 feh arandr ulauncher")
@@ -109,6 +113,7 @@ def main():
     install_tmux_config()
     install_fzf()
     install_local_config()
+    post_setup()
 
 
 if __name__ == "__main__":
