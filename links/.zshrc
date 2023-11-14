@@ -81,7 +81,7 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux colored-man-pages zsh-syntax-highlighting zsh-autosuggestions docker-compose ssh-agent zsh-interactive-cd bazel pre-commit ubuntu)
+plugins=(git tmux colored-man-pages zsh-syntax-highlighting zsh-autosuggestions docker-compose ssh-agent zsh-interactive-cd bazel pre-commit ubuntu poetry kubectl)
 
 zstyle :omz:plugins:ssh-agent lifetime 4h
 
