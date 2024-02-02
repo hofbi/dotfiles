@@ -11,7 +11,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir vcs newline prompt_char)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time ip time virtualenv anaconda)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time ip time virtualenv)
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%242F╭─'
 POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%242F├─'
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%242F╰─'
