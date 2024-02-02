@@ -1,0 +1,66 @@
+[tool.flake8]
+max-line-length = 120
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_column_numbers = true
+show_error_codes = true
+show_error_context = true
+strict_equality = true
+strict_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.pylint.BASIC]
+# Stick to snake case, but accept setUp and tearDown from unittest
+method-rgx = "(([a-z_][a-z0-9_]*)|(setUp)|(tearDown))$"
+
+[tool.pylint.FORMAT]
+max-line-length = 120
+
+[tool.pylint.MASTER]
+# Add files or directories to the blacklist. They should be base names, not paths.
+ignore = ["venv"]
+
+[tool.pylint."MESSAGES CONTROL"]
+# Only show warnings with the listed confidence levels. Leave empty to show
+# all. Valid levels: HIGH, INFERENCE, INFERENCE_FAILURE, UNDEFINED
+confidence = ""
+disable = [
+  "missing-function-docstring",
+  "line-too-long",
+  "import-error" # disabled since pre-commit runs pylint in a separate venv
+]
+
+[tool.ruff]
+fix = true
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "A",
+  "ANN",
+  "ARG",
+  "COM", # Done via formatter
+  "D",
+  "DTZ001", # TODO: Enable
+  "FBT",
+  "FIX",
+  "INP",
+  "PERF203",
+  "PT", # We don't use pytest here
+  "S",
+  "T",
+  "TD"
+]

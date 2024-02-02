@@ -1,5 +1,3 @@
-file_finder = find . -type f $(1) -not -path './venv/*'
-
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 .PHONY: default

@@ -2,8 +2,6 @@
 
 """Installer for all dotfiles and the tools using it"""
 
-# pylint: disable=line-too-long
-
 import os
 from pathlib import Path
 from subprocess import check_call
@@ -21,34 +19,26 @@ def clone_or_update_git_repo(url: str, path: str) -> None:
         call(f"git -C {path} pull")
 
 
-def install_apt_packages():
+def install_apt_packages() -> None:
     sudo_command = "sudo"
     if "PASS" in os.environ:
         # Set pass for CI job
         sudo_command = f"echo {os.environ.get('PASS')} | sudo -S"
 
-    call(
-        f"{sudo_command} apt update && {sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv"  # noqa: E501
-    )
+    call(f"{sudo_command} apt update")
+    call(f"{sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv")
 
 
-def install_fonts():
-    call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"  # noqa: E501
-    )
-    call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"  # noqa: E501
-    )
-    call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"  # noqa: E501
-    )
-    call(
-        "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"  # noqa: E501
-    )
+def install_fonts() -> None:
+    wget_fonts_base_call = "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master"
+    call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Regular.ttf")
+    call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Bold.ttf")
+    call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Italic.ttf")
+    call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Bold%20Italic.ttf")
 
 
-def install_oh_my_zsh():
-    def install_plugins():
+def install_oh_my_zsh() -> None:
+    def install_plugins() -> None:
         oh_path = "~/.oh-my-zsh/custom"
         clone_or_update_git_repo(
             "https://github.com/romkatv/powerlevel10k.git",
@@ -70,38 +60,35 @@ def install_oh_my_zsh():
     install_plugins()
 
 
-def install_vim_config():
-    clone_or_update_git_repo(
-        "https://github.com/VundleVim/Vundle.vim.git", "~/.vim/bundle/Vundle.vim"
-    )
+def install_vim_config() -> None:
+    clone_or_update_git_repo("https://github.com/VundleVim/Vundle.vim.git", "~/.vim/bundle/Vundle.vim")
     call("vim +PluginInstall +PluginClean! +qall")
 
 
-def install_tmux_config():
-    clone_or_update_git_repo(
-        "https://github.com/tmux-plugins/tpm", "~/.tmux/plugins/tpm"
-    )
+def install_tmux_config() -> None:
+    tmp_path = "~/.tmux/plugins/tpm"
+    clone_or_update_git_repo("https://github.com/tmux-plugins/tpm", tmp_path)
     call(
-        "tmux start-server && tmux new-session -d && sleep 1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server"  # noqa: E501
+        f"tmux start-server && tmux new-session -d && sleep 1 && {tmp_path}/scripts/install_plugins.sh && tmux kill-server"  # noqa: E501
     )
 
 
-def install_fzf():
+def install_fzf() -> None:
     clone_or_update_git_repo("https://github.com/junegunn/fzf.git", "~/.fzf")
     call("~/.fzf/install --all")
 
 
-def install_local_config():
+def install_local_config() -> None:
     Path.home().joinpath(".zshrc.local").touch(exist_ok=True)
 
 
-def install_i3():
+def install_i3() -> None:
     call("sudo add-apt-repository ppa:agornostal/ulauncher")
     call("sudo apt update && sudo apt install -y i3 feh arandr ulauncher")
     call("pip3 install i3ipc")
 
 
-def main():
+def main() -> None:
     install_apt_packages()
     install_fonts()
     install_oh_my_zsh()
