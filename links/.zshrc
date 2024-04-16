@@ -83,6 +83,7 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git tmux colored-man-pages zsh-syntax-highlighting zsh-autosuggestions docker-compose ssh-agent zsh-interactive-cd bazel pre-commit ubuntu poetry kubectl)
 
+zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent lifetime 4h
 
 source $ZSH/oh-my-zsh.sh
