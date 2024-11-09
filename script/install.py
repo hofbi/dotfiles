@@ -26,7 +26,7 @@ def install_apt_packages() -> None:
         sudo_command = f"echo {os.environ.get('PASS')} | sudo -S"
 
     call(f"{sudo_command} apt update")
-    call(f"{sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv")
+    call(f"{sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv git-delta ripgrep")
 
 
 def install_fonts() -> None:
@@ -79,6 +79,7 @@ def install_fzf() -> None:
 
 
 def install_local_config() -> None:
+    Path.home().joinpath(".gitconfig.local").touch(exist_ok=True)
     Path.home().joinpath(".zshrc.local").touch(exist_ok=True)
 
 
