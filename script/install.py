@@ -19,6 +19,12 @@ def clone_or_update_git_repo(url: str, path: str) -> None:
         call(f"git -C {path} pull")
 
 
+def get_ubuntu_version() -> str:
+    lines = Path("/etc/os-release").read_text().splitlines()  # pylint: disable=W1514
+    version = next(line for line in lines if "VERSION_ID" in line)
+    return version.split("=")[1].strip('"')
+
+
 def install_apt_packages() -> None:
     sudo_command = "sudo"
     if "PASS" in os.environ:
@@ -26,7 +32,9 @@ def install_apt_packages() -> None:
         sudo_command = f"echo {os.environ.get('PASS')} | sudo -S"
 
     call(f"{sudo_command} apt update")
-    call(f"{sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv git-delta ripgrep")
+    call(f"{sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv ripgrep")
+    if get_ubuntu_version().split(".")[0] >= "24":
+        call(f"{sudo_command} apt install -y git-delta")
 
 
 def install_fonts() -> None:
