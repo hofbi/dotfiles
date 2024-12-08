@@ -19,16 +19,18 @@ def clone_or_update_git_repo(url: str, path: str) -> None:
         call(f"git -C {path} pull")
 
 
-def get_ubuntu_version() -> str:
+def get_major_ubuntu_version() -> int:
     lines = Path("/etc/os-release").read_text().splitlines()  # pylint: disable=W1514
     version = next(line for line in lines if "VERSION_ID" in line)
-    return version.split("=")[1].strip('"')
+    ubuntu_version = version.split("=")[1].strip('"')
+    return int(ubuntu_version.split(".")[0])
 
 
 def install_apt_packages() -> None:
     call("sudo apt update")
     call("sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv ripgrep")
-    if get_ubuntu_version().split(".")[0] >= "24":
+    min_version_required_for_git_delta = 24
+    if get_major_ubuntu_version() >= min_version_required_for_git_delta:
         call("sudo apt install -y git-delta")
 
 

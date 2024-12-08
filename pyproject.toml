@@ -59,7 +59,6 @@ ignore = [
   "FIX",
   "INP",
   "PERF203",
-  "PT", # We don't use pytest here
   "S",
   "T",
   "TD"
