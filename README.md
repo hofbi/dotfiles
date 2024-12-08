@@ -23,6 +23,6 @@ Setup the docker test environment
 
 ```shell
 cd docker
-docker compose build
+docker compose build --build-arg user_id=$UID
 docker compose run dotfiles
 ```

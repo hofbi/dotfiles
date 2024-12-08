@@ -1,10 +1,7 @@
-version: '3'
 services:
   dotfiles:
     build: .
     volumes:
       - ../:/home/foo/.dotfiles
     working_dir: /home/foo/.dotfiles
-    environment:
-      - USER=foo
     command: bash

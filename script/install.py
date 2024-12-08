@@ -26,15 +26,10 @@ def get_ubuntu_version() -> str:
 
 
 def install_apt_packages() -> None:
-    sudo_command = "sudo"
-    if "PASS" in os.environ:
-        # Set pass for CI job
-        sudo_command = f"echo {os.environ.get('PASS')} | sudo -S"
-
-    call(f"{sudo_command} apt update")
-    call(f"{sudo_command} apt install -y vim zsh terminator tmux powerline fonts-powerline mmv ripgrep")
+    call("sudo apt update")
+    call("sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv ripgrep")
     if get_ubuntu_version().split(".")[0] >= "24":
-        call(f"{sudo_command} apt install -y git-delta")
+        call("sudo apt install -y git-delta")
 
 
 def install_fonts() -> None:
