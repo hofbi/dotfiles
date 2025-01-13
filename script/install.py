@@ -3,6 +3,7 @@
 """Installer for all dotfiles and the tools using it"""
 
 import os
+import platform
 from pathlib import Path
 from subprocess import check_call
 
@@ -34,7 +35,15 @@ def install_apt_packages() -> None:
         call("sudo apt install -y git-delta")
 
 
+def install_brew_packages() -> None:
+    call("brew update")
+    # TODO: powerline fonts-powerline  pylint: disable=W0511
+    call("brew install vim zsh tmux mmv ripgrep git-delta")
+
+
 def install_fonts() -> None:
+    # TODO: OXS might use Library/Fonts  pylint: disable=W0511
+    # see https://github.com/romkatv/powerlevel10k/blob/master/internal/wizard.zsh#L464-L468
     fonts_dir = Path.home().joinpath(".local/share/fonts")
     wget_fonts_base_call = f"wget -P {fonts_dir} https://github.com/romkatv/powerlevel10k-media/raw/master"
     call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Regular.ttf")
@@ -94,7 +103,11 @@ def install_i3() -> None:
 
 
 def main() -> None:
-    install_apt_packages()
+    if platform.system() == "Linux":
+        install_apt_packages()
+    elif platform.system() == "Darwin":
+        install_brew_packages()
+
     install_fonts()
     install_oh_my_zsh()
     install_vim_config()
