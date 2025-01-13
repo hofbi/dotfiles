@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Installer for all dotfiles and the tools using it"""
+"""Installer for all dotfiles and the tools using it."""
 
 import os
 import platform

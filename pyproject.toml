@@ -44,22 +44,18 @@ disable = [
 [tool.ruff]
 fix = true
 line-length = 120
-target-version = "py310"
+target-version = "py312"
+unsafe-fixes = true
 
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-  "A",
-  "ANN",
-  "ARG",
   "COM", # Done via formatter
-  "D",
-  "DTZ001", # TODO: Enable
-  "FBT",
-  "FIX",
-  "INP",
-  "PERF203",
-  "S",
+  "D103", # No need for docstring in functions
+  "D203", # Incompatible with D211
+  "D213", # Incompatible with D212
+  "FIX002",
+  "S602",
   "T",
   "TD"
 ]
