@@ -12,8 +12,8 @@ def call(command: str) -> int:
     return check_call(command, shell=True)
 
 
-def clone_or_update_git_repo(url: str, path: str) -> None:
-    if not Path(path).expanduser().is_dir():
+def clone_or_update_git_repo(url: str, path: Path) -> None:
+    if not path.is_dir():
         call(f"git clone {url} {path}")
     else:
         call(f"git -C {path} pull")
@@ -35,7 +35,8 @@ def install_apt_packages() -> None:
 
 
 def install_fonts() -> None:
-    wget_fonts_base_call = "wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master"
+    fonts_dir = Path.home().joinpath(".local/share/fonts")
+    wget_fonts_base_call = f"wget -P {fonts_dir} https://github.com/romkatv/powerlevel10k-media/raw/master"
     call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Regular.ttf")
     call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Bold.ttf")
     call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Italic.ttf")
@@ -44,18 +45,13 @@ def install_fonts() -> None:
 
 def install_oh_my_zsh() -> None:
     def install_plugins() -> None:
-        oh_path = "~/.oh-my-zsh/custom"
+        oh_path = Path.home() / ".oh-my-zsh" / "custom"
+        clone_or_update_git_repo("https://github.com/romkatv/powerlevel10k.git", oh_path / "themes" / "powerlevel10k")
         clone_or_update_git_repo(
-            "https://github.com/romkatv/powerlevel10k.git",
-            f"{oh_path}/themes/powerlevel10k",
+            "https://github.com/zsh-users/zsh-autosuggestions.git", oh_path / "plugins" / "zsh-autosuggestions"
         )
         clone_or_update_git_repo(
-            "https://github.com/zsh-users/zsh-autosuggestions.git",
-            f"{oh_path}/plugins/zsh-autosuggestions",
-        )
-        clone_or_update_git_repo(
-            "https://github.com/zsh-users/zsh-syntax-highlighting.git",
-            f"{oh_path}/plugins/zsh-syntax-highlighting",
+            "https://github.com/zsh-users/zsh-syntax-highlighting.git", oh_path / "plugins" / "zsh-syntax-highlighting"
         )
 
     if "ZSH" not in os.environ:
@@ -66,21 +62,24 @@ def install_oh_my_zsh() -> None:
 
 
 def install_vim_config() -> None:
-    clone_or_update_git_repo("https://github.com/VundleVim/Vundle.vim.git", "~/.vim/bundle/Vundle.vim")
+    clone_or_update_git_repo(
+        "https://github.com/VundleVim/Vundle.vim.git", Path.home() / ".vim" / "bundle" / "Vundle.vim"
+    )
     call("vim +PluginInstall +PluginClean! +qall")
 
 
 def install_tmux_config() -> None:
-    tmp_path = "~/.tmux/plugins/tpm"
-    clone_or_update_git_repo("https://github.com/tmux-plugins/tpm", tmp_path)
+    tpm_path = Path.home() / ".tmux" / "plugins" / "tpm"
+    clone_or_update_git_repo("https://github.com/tmux-plugins/tpm", tpm_path)
     call(
-        f"tmux start-server && tmux new-session -d && sleep 1 && {tmp_path}/scripts/install_plugins.sh && tmux kill-server"  # noqa: E501
+        f"tmux start-server && tmux new-session -d && sleep 1 && {tpm_path}/scripts/install_plugins.sh && tmux kill-server"  # noqa: E501
     )
 
 
 def install_fzf() -> None:
-    clone_or_update_git_repo("https://github.com/junegunn/fzf.git", "~/.fzf")
-    call("~/.fzf/install --all")
+    fzf_path = Path.home() / ".fzf"
+    clone_or_update_git_repo("https://github.com/junegunn/fzf.git", fzf_path)
+    call(f"{fzf_path / 'install'} --all")
 
 
 def install_local_config() -> None:
