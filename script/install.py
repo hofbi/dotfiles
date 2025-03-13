@@ -29,7 +29,7 @@ def get_major_ubuntu_version() -> int:
 
 def install_apt_packages() -> None:
     call("sudo apt update")
-    call("sudo apt install -y vim zsh terminator tmux powerline fonts-powerline mmv ripgrep")
+    call("sudo apt install -y wget vim zsh terminator tmux powerline fonts-powerline mmv ripgrep")
     min_version_required_for_git_delta = 24
     if get_major_ubuntu_version() >= min_version_required_for_git_delta:
         call("sudo apt install -y git-delta")
@@ -37,14 +37,14 @@ def install_apt_packages() -> None:
 
 def install_brew_packages() -> None:
     call("brew update")
-    # TODO: powerline fonts-powerline  pylint: disable=W0511
-    call("brew install vim zsh tmux mmv ripgrep git-delta")
+    call("brew install wget vim zsh tmux mmv ripgrep git-delta pipx")
+    call("pipx install powerline-status --force")
 
 
 def install_fonts() -> None:
-    # TODO: OXS might use Library/Fonts  pylint: disable=W0511
-    # see https://github.com/romkatv/powerlevel10k/blob/master/internal/wizard.zsh#L464-L468
-    fonts_dir = Path.home().joinpath(".local/share/fonts")
+    fonts_dir = Path.home() / ("Library/Fonts" if platform.system() == "Darwin" else ".local/share/fonts")
+    fonts_dir.mkdir(parents=True, exist_ok=True)
+
     wget_fonts_base_call = f"wget -P {fonts_dir} https://github.com/romkatv/powerlevel10k-media/raw/master"
     call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Regular.ttf")
     call(f"{wget_fonts_base_call}/MesloLGS%20NF%20Bold.ttf")
