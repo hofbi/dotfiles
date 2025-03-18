@@ -14,8 +14,7 @@ Clone the repository and run
 ./install.sh
 ```
 
-1. This will change the default shell to zsh, type **"y"** if you get asked.
-1. Then press `Ctrl+D` to exit the new shell and continue the setup.
+This will change the default shell to zsh.
 
 ## Test Environment
 

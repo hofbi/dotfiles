@@ -65,8 +65,9 @@ def install_oh_my_zsh() -> None:
 
     if "ZSH" not in os.environ:
         call(
-            'sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --keep-zshrc"'  # noqa: E501
+            'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc'  # noqa: E501
         )
+        call("sudo chsh -s $(which zsh)")
     install_plugins()
 
 
