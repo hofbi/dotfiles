@@ -4,6 +4,7 @@
 
 import os
 import platform
+import shutil
 from pathlib import Path
 from subprocess import check_call
 
@@ -53,8 +54,8 @@ def install_fonts() -> None:
 
 
 def install_oh_my_zsh() -> None:
-    def install_plugins() -> None:
-        oh_path = Path.home() / ".oh-my-zsh" / "custom"
+    def install_plugins(oh_my_zsh_path: Path) -> None:
+        oh_path = oh_my_zsh_path / "custom"
         clone_or_update_git_repo("https://github.com/romkatv/powerlevel10k.git", oh_path / "themes" / "powerlevel10k")
         clone_or_update_git_repo(
             "https://github.com/zsh-users/zsh-autosuggestions.git", oh_path / "plugins" / "zsh-autosuggestions"
@@ -63,12 +64,14 @@ def install_oh_my_zsh() -> None:
             "https://github.com/zsh-users/zsh-syntax-highlighting.git", oh_path / "plugins" / "zsh-syntax-highlighting"
         )
 
+    oh_my_zsh_path = Path.home() / ".oh-my-zsh"
     if "ZSH" not in os.environ:
+        shutil.rmtree(oh_my_zsh_path, ignore_errors=True)
         call(
             'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc'  # noqa: E501
         )
         call("sudo chsh -s $(which zsh)")
-    install_plugins()
+    install_plugins(oh_my_zsh_path)
 
 
 def install_vim_config() -> None:
