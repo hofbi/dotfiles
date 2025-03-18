@@ -11,7 +11,7 @@ Collection of config and dotfiles.
 Clone the repository and run
 
 ```shell
-make setup
+./install.sh
 ```
 
 1. This will change the default shell to zsh, type **"y"** if you get asked.

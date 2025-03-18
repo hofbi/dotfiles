@@ -20,4 +20,4 @@ jobs:
       - name: Build the Docker image
         run: cd docker && docker compose build --build-arg user_id=$UID
       - name: Run setup
-        run: cd docker && docker compose run -e ZSH=true dotfiles bash -c "make setup"
+        run: cd docker && docker compose run -e ZSH=true dotfiles bash -c "./install.sh"
