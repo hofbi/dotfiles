@@ -11,7 +11,7 @@ repos:
       - id: check-symlinks
       - id: check-toml
       - id: check-yaml
-        exclude: (?x)( .clang-format )
+        exclude: (?x)( .clang-format|.clang-tidy )
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-private-key
@@ -23,7 +23,7 @@ repos:
     hooks:
       - id: toml-sort-fix
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.2
+    rev: v0.15.0
     hooks:
       - id: ruff
       - id: ruff-format
@@ -36,16 +36,16 @@ repos:
           - flake8-bugbear  # Ruff does not implement all of bugbear
           - flake8-requirements  # Not yet implemented https://github.com/astral-sh/ruff/issues/4100
   - repo: https://github.com/PyCQA/pylint
-    rev: v4.0.2
+    rev: v4.0.4
     hooks:
       - id: pylint
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.0
+    rev: v3.21.2
     hooks:
       - id: pyupgrade
         args: [--py312-plus]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
+    rev: v1.19.1
     hooks:
       - id: mypy
         args: [--python-version, "3.12"]
@@ -55,6 +55,6 @@ repos:
       - id: shellcheck
         exclude: ^links/
   - repo: https://github.com/crate-ci/typos
-    rev: v1.38.1
+    rev: v1.43.4
     hooks:
       - id: typos
