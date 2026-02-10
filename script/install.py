@@ -96,7 +96,6 @@ def install_fzf() -> None:
 
 
 def install_local_config() -> None:
-    Path.home().joinpath(".gitconfig.local").touch(exist_ok=True)
     Path.home().joinpath(".zshrc.local").touch(exist_ok=True)
 
 
